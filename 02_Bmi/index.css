@@ -1,0 +1,14 @@
+body{
+    background-color: black;
+    color: white;
+}
+#bmi{
+    margin-top: 4px;
+    width: 300px;
+    height: 21px;
+    border: 2px solid white;
+    display: inline-block;
+}
+button{
+    margin-top: 8px;
+}
