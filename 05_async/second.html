@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>HI! JAVASCRIPT ASYNC CODE.</h1>
+    <button id="start">start</button>
+    <button id="stop">stop</button>
+    <script>
+        const toPrint = function () {
+
+            console.log("Running! ", Date.now());
+ 
+        }
+
+        let intervalId = null;         //Global variable for proper use setInterval using start , stop button ;
+
+
+        const StartInterval = function () {
+            if(intervalId===null) {            //cond prevents making many setIntervals  AND Use of (===) for preventing bugs ;
+            intervalId = setInterval(toPrint, 1000);
+            }
+        }
+
+        const StopInterval = function () {
+            clearInterval(intervalId);
+
+        }
+        const start = document.querySelector("#start");
+        const stop = document.querySelector("#stop");
+
+        start.addEventListener('click', function() {
+            console.log("STARTED");
+            StartInterval();
+
+
+        })
+        stop.addEventListener('click', function () {
+            StopInterval();
+            intervalId=null;       //reset value that setInterval can started again 
+            console.log("STOPPED");
+            
+           
+        })
+    </script>
+</body>
+
+</html>
