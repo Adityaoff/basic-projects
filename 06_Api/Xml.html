@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Xml.css">
+</head>
+
+<body style="background-color: #212121;">
+
+    <!-- Numbers Representing States In XMLHttpRequest.readystate() -->
+    <!-- Value State Description
+0 = UNSENT Client has been created. open() not called yet.
+1 = OPENED open() has been called.
+2 = HEADERS_RECEIVED send() has been called, and headers and status are available.
+3 = LOADING Downloading; responseText holds partial data.
+4 = DONE The operation is complete. -->
+
+    <!-- //------------------------------------------------------------------------------------------------- -->
+    <div style="background-color: yellow; color:black; height: 500px; width: 400px;">
+        <img  id="image" style="width:300px; height:350px; ">
+        <p>Number of Followers: <span id="count"></span></p>
+        <button id="create">Create</button>
+    </div>
+    <script>
+        let Data = null;
+        const Url = 'https://api.github.com/users/Adityaoff';
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', Url);
+      
+
+        // This onreadystatechange just registeres the callback() function but runs before like:- addEventistner callback() function .....
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                Data = JSON.parse(this.responseText);
+
+                 const btn = document.getElementById('create');
+                const text = document.getElementById('count');
+                const image = document.getElementById('image');
+
+                btn.addEventListener('click', function () {
+                    image.setAttribute('src', Data.avatar_url);
+                    text.innerHTML = Data.followers;
+                })
+
+            }
+        }
+           
+        xhr.send()
+    </script>
+</body>
+
+</html>

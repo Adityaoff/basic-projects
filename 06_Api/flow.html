@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img id="image" width="200" />
+    <p id="count"></p>
+    <button id="create">Load GitHub Data</button>
+                                                   <!-- Chatgpt Code : -->
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
+                                     <!-- Understanding Flow of Javascript with Aysnchronus -->
+    <script>
+        console.log("1️⃣ Script started");
+
+        let Data = null;
+        const Url = 'https://api.github.com/users/Adityaoff';
+
+        const xhr = new XMLHttpRequest();
+        console.log("2️⃣ XMLHttpRequest object created");
+
+        xhr.open('GET', Url);
+        console.log("3️⃣ Request prepared with open()");
+
+        xhr.onreadystatechange = function () {
+            console.log("🚨 onreadystatechange fired: readyState =", xhr.readyState);
+
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log("✅ Response received, status OK");
+
+                Data = JSON.parse(this.responseText);
+                console.log("📦 Data parsed:", Data);
+
+                const btn = document.getElementById('create');
+                const text = document.getElementById('count');
+                const image = document.getElementById('image');
+
+                btn.addEventListener('click', function () {
+                    console.log("🖱️ Button clicked");
+
+                    image.setAttribute('src', Data.avatar_url);
+                    text.innerHTML = `Followers: ${Data.followers}`;
+                });
+
+                console.log("🛎️ Click listener added");
+            }
+        };
+
+        console.log("4️⃣ onreadystatechange handler registered");
+
+        xhr.send();
+        console.log("5️⃣ Request sent");
+
+        console.log("6️⃣ Script finished");
+    </script>
+
+</body>
+</html>
